@@ -24,6 +24,14 @@ const taskSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    DSRReportNote: {
+      type: String,
+      default: "",
+    },
+    GeminiReportNote: {
+      type: String,
+      default: "",
+    },
     // slug: {
     //   type: String,
     //   required: true,

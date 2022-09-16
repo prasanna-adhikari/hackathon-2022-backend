@@ -144,7 +144,15 @@ export const viewSingleTasks = async (req, res) => {
 
 export const updateTask = async (req, res) => {
   const taskID = req.params.taskID;
-  const { name, description, flag, isDSRReport, isGeminiReport } = req.body;
+  const {
+    name,
+    description,
+    flag,
+    isDSRReport,
+    isGeminiReport,
+    DSRReportNote,
+    GeminiReportNote,
+  } = req.body;
 
   try {
     const currentTask = await Tasks.findOne({ _id: taskID });
@@ -153,6 +161,8 @@ export const updateTask = async (req, res) => {
       currentTask.flag = flag;
       currentTask.description = description;
       currentTask.isDSRReport = isDSRReport;
+      currentTask.DSRReportNote = DSRReportNote;
+      currentTask.GeminiReportNote = GeminiReportNote;
       currentTask.isGeminiReport = isGeminiReport;
       const updateTask = await currentTask.save();
       const taskList = await Tasks.find();

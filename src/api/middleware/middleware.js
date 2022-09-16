@@ -4,13 +4,14 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./files");
   },
+
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname.replace(/\\/g, "/"));
+    cb(null, file.originalname.replace(/\\/g, "/"));
   },
 });
 
 const filter = (req, file, cb) => {
-    console.log(file)
+  console.log(file);
   if (
     file.mimetype === "application/msword" ||
     file.mimetype ===
