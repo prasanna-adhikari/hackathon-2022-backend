@@ -1,13 +1,15 @@
 import Tasks from "../models/task.mode.js";
 
 export const addTask = async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, flag, batchCount } = req.body;
   const files = req?.file?.path;
   console.log(req.file);
   try {
     const taskObj = new Tasks({
       name,
       description,
+      flag,
+      batchCount,
       //   files,
     });
 
@@ -80,14 +82,14 @@ export const deleteTask = async (req, res) => {
   try {
     const deleteTask = await Tasks.findOneAndDelete({ _id: taskID });
 
-    return res.status(SUCCESS).json({
+    return res.status(200).json({
       success: true,
       message: "Deleted successfully.",
       developerMessage: "",
       result: deleteTask,
     });
   } catch (error) {
-    res.status(INTERNAL_SERVER_ERROR).json({
+    res.status(500).json({
       success: false,
       message: "Failed to delete task.",
       developerMessage: error.message,
@@ -149,6 +151,7 @@ export const updateTask = async (req, res) => {
     description,
     flag,
     isDSRReport,
+    batchCount,
     isGeminiReport,
     DSRReportNote,
     GeminiReportNote,
@@ -186,7 +189,7 @@ export const updateTask = async (req, res) => {
     console.log(error);
     return res.status(400).json({
       success: false,
-      message: "Failed to update city.",
+      message: "Failed to update task.",
       developerMessage: error.message,
       result: {},
     });

@@ -13,8 +13,12 @@ const taskSchema = new Schema(
     },
     flag: {
       type: String,
-      enum: ["import", "dsr", "complete"],
-      default: "import",
+      enum: ["batch import", "import", "dsr", "batch dsr", "complete"],
+      // default: "import",
+    },
+    batchCount: {
+      type: Number,
+      default: 0,
     },
     isDSRReport: {
       type: Boolean,
