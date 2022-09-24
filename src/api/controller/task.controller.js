@@ -166,6 +166,7 @@ export const updateTask = async (req, res) => {
       currentTask.isDSRReport = isDSRReport;
       currentTask.DSRReportNote = DSRReportNote;
       currentTask.GeminiReportNote = GeminiReportNote;
+      currentTask.batchCount = batchCount;
       currentTask.isGeminiReport = isGeminiReport;
       const updateTask = await currentTask.save();
       const taskList = await Tasks.find();

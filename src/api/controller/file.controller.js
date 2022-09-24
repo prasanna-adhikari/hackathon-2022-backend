@@ -65,3 +65,45 @@ export const viewFiles = async (req, res) => {
     });
   }
 };
+export const searchFiles = async (req, res) => {
+  const taskID = req?.params.id;
+  const searchTerm = req?.query?.search;
+  console.log(searchTerm);
+  try {
+    const fileList = await Files.find({
+      task: taskID,
+      fileName: new RegExp(searchTerm, "i"),
+    }).sort({ createdAt: -1 });
+    const totalFiles = await Files.countDocuments({
+      task: taskID,
+      fileName: new RegExp(searchTerm, "i"),
+    });
+    if (totalFiles > 0) {
+      return res.status(200).json({
+        success: true,
+        message: "Fetched Data",
+        developerMessage: "",
+        result: fileList,
+        searchTerm: searchTerm,
+        total: totalFiles,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "No File found.",
+        developerMessage: "",
+        result: [],
+
+        total: totalFiles,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: "Could not fetch File",
+      developerMessage: error.message,
+      result: [],
+    });
+  }
+};
