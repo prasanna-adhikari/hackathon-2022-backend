@@ -34,7 +34,7 @@ export const viewFiles = async (req, res) => {
   const taskID = req?.params.id;
 
   try {
-    const fileList = await Files.find({ task: taskID });
+    const fileList = await Files.find({ task: taskID }).sort({ createdAt: -1 });
     const totalFiles = await Files.countDocuments({ task: taskID });
     if (totalFiles > 0) {
       return res.status(200).json({
