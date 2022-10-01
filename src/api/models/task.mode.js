@@ -7,6 +7,14 @@ const taskSchema = new Schema(
       type: String,
       required: true,
     },
+    clientID: {
+      type: String,
+      required: true,
+    },
+    releaseTag: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,

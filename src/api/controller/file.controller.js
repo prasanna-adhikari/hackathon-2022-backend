@@ -107,3 +107,23 @@ export const searchFiles = async (req, res) => {
     });
   }
 };
+export const deleteFIle = async (req, res) => {
+  const fileID = req.params.fileID;
+  try {
+    const deleteTask = await Files.findOneAndDelete({ _id: fileID });
+
+    return res.status(200).json({
+      success: true,
+      message: "Deleted successfully.",
+      developerMessage: "",
+      result: deleteTask,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete task.",
+      developerMessage: error.message,
+      result: {},
+    });
+  }
+};
