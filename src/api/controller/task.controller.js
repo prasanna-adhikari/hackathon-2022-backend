@@ -1,7 +1,7 @@
 import Tasks from "../models/task.mode.js";
 
 export const addTask = async (req, res) => {
-  const { name, description, flag, clientID, releaseTag } = req.body;
+  const { name, description, flag, clientID, releaseTag, assignee } = req.body;
   const files = req?.file?.path;
   console.log(req.file);
   try {
@@ -11,6 +11,7 @@ export const addTask = async (req, res) => {
       flag,
       clientID,
       releaseTag,
+      assignee,
       //   files,
     });
 
@@ -158,6 +159,7 @@ export const updateTask = async (req, res) => {
     GeminiReportNote,
     clientID,
     releaseTag,
+    assignee,
   } = req.body;
 
   try {
@@ -172,6 +174,7 @@ export const updateTask = async (req, res) => {
       currentTask.batchCount = batchCount;
       currentTask.clientID = clientID;
       currentTask.releaseTag = releaseTag;
+      currentTask.assignee = assignee;
       currentTask.isGeminiReport = isGeminiReport;
       const updateTask = await currentTask.save();
       const taskList = await Tasks.find();

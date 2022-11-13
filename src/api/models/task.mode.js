@@ -44,6 +44,9 @@ const taskSchema = new Schema(
       type: String,
       default: "",
     },
+    assignee: {
+      type: String,
+    },
     // slug: {
     //   type: String,
     //   required: true,
